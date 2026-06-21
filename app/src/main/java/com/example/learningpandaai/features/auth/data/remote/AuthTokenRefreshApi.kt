@@ -5,7 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 /**
- * Synchronous refresh API for [okhttp3.Authenticator] — must use [Call], not suspend.
+ * Synchronous refresh API for [okhttp3.Authenticator] — must use [retrofit2.Call], not suspend.
  * Uses a dedicated OkHttp client without the token authenticator to avoid refresh loops.
  */
 interface AuthTokenRefreshApi {

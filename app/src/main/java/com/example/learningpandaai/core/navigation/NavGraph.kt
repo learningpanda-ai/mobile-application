@@ -10,6 +10,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.learningpandaai.features.auth.presentation.AuthScreen
+import com.example.learningpandaai.features.auth.presentation.AuthViewModel
 import com.example.learningpandaai.features.splash.presentation.SplashScreen
 import com.example.learningpandaai.features.splash.presentation.SplashViewModel
 
@@ -38,7 +40,20 @@ fun SetupNavGraph(
         }
 
         composable(route = Screen.Auth.route) {
-            PlaceholderScreen("Auth -- coming next")
+            val authViewModel: AuthViewModel = hiltViewModel()
+            AuthScreen(
+                viewModel = authViewModel,
+                onNavigateToOnboarding = {
+                    navController.navigate(Screen.Onboarding.route) {
+                        popUpTo(Screen.Auth.route) { inclusive = true }
+                    }
+                },
+                onNavigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Auth.route) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable(route = Screen.Onboarding.route) {

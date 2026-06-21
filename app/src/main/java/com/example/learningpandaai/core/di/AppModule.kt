@@ -19,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
+import com.example.learningpandaai.features.auth.data.remote.AuthApiService
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -95,6 +96,11 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(AuthTokenRefreshApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAuthApiService(retrofit: Retrofit): AuthApiService =
+        retrofit.create(AuthApiService::class.java)
 
 
 }

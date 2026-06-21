@@ -2,8 +2,49 @@ package com.example.learningpandaai.features.auth.data.remote
 
 import com.google.gson.annotations.SerializedName
 
+// Request Bodies (app → server)
+
+data class SendOtpRequest(
+    @SerializedName("email") val email: String,
+    @SerializedName("turnstile_token") val turnstileToken: String? = null
+)
+
+data class VerifyOtpRequest(
+    @SerializedName("challenge_id") val challengeId: String,
+    @SerializedName("otp") val otp: String
+)
+
+data class MagicLinkVerifyRequest(
+    @SerializedName("challenge_id") val challengeId: String,
+    @SerializedName("token") val token: String
+)
+
+data class ExchangeCodeRequest(
+    @SerializedName("code") val code: String
+)
+
+data class GoogleMobileRequest(
+    @SerializedName("id_token") val idToken: String
+)
+
 data class RefreshTokenRequest(
     @SerializedName("refresh_token") val refreshToken: String? = null
+)
+
+data class LogoutRequest(
+    @SerializedName("refresh_token") val refreshToken: String? = null
+)
+
+//  Response Bodies (server → app)
+
+data class SendOtpResponseDto(
+    @SerializedName("message") val message: String? = null,
+    @SerializedName("challenge_id") val challengeId: String?,
+    @SerializedName("detail") val detail: String?
+)
+
+data class OneTimeCodeDto(
+    @SerializedName("code") val code: String?
 )
 
 data class AuthUserDto(
