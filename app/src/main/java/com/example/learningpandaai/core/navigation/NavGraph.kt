@@ -16,6 +16,10 @@ import com.example.learningpandaai.features.splash.presentation.SplashScreen
 import com.example.learningpandaai.features.splash.presentation.SplashViewModel
 import com.example.learningpandaai.features.onboarding.presentation.OnboardingScreen
 import com.example.learningpandaai.features.onboarding.presentation.OnboardingViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.learningpandaai.features.dashboard.presentation.DashboardScreen
+import com.example.learningpandaai.features.dashboard.presentation.DashboardViewModel
+import androidx.compose.runtime.getValue
 
 @Composable
 fun SetupNavGraph(
@@ -69,8 +73,16 @@ fun SetupNavGraph(
                 }
             )
         }
+
         composable(route = Screen.Dashboard.route) {
-            PlaceholderScreen("Dashboard — coming next")
+            val dashboardViewModel: DashboardViewModel = hiltViewModel()
+            val dashboardUiState by dashboardViewModel.uiState.collectAsStateWithLifecycle()
+            DashboardScreen(
+                parentNavController = navController,
+                dashboardViewModel = dashboardViewModel,
+                firstName = dashboardUiState.firstName,
+                selectedSubjects = dashboardUiState.selectedSubjects
+            )
         }
 
 

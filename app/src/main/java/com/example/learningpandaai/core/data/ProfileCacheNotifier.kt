@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class ProfileCacheNotifier @Inject constructor(){
 
     private val _updates = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
-    val update: SharedFlow<Unit> = _updates.asSharedFlow()
+    val updates: SharedFlow<Unit> = _updates.asSharedFlow()
 
     fun notifyProfileCacheUpdated() {
         _updates.tryEmit(Unit)

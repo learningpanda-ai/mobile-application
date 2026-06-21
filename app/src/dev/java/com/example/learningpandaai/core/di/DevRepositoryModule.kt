@@ -12,6 +12,9 @@ import javax.inject.Singleton
 import com.example.learningpandaai.features.onboarding.data.MockOnboardingRepositoryImpl
 import com.example.learningpandaai.features.onboarding.data.OnboardingRepositoryImpl
 import com.example.learningpandaai.features.onboarding.domain.OnboardingRepository
+import com.example.learningpandaai.features.profile.data.MockProfileRepositoryImpl
+import com.example.learningpandaai.features.profile.data.ProfileRepositoryImpl
+import com.example.learningpandaai.features.profile.domain.ProfileRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,5 +34,11 @@ object DevRepositoryModule {
         mock: MockOnboardingRepositoryImpl
     ): OnboardingRepository = if (BuildConfig.DEV_REAL_ONBOARDING) real else mock
 
+    @Provides
+    @Singleton
+    fun provideProfileRepository(
+        real: ProfileRepositoryImpl,
+        mock: MockProfileRepositoryImpl
+    ): ProfileRepository = if (BuildConfig.DEV_REAL_PROFILE) real else mock
 
 }
