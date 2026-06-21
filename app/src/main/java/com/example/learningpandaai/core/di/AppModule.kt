@@ -21,6 +21,9 @@ import javax.inject.Named
 import javax.inject.Singleton
 import com.example.learningpandaai.features.auth.data.remote.AuthApiService
 import com.example.learningpandaai.features.profile.data.remote.ProfileApiService
+import com.example.learningpandaai.features.profile.data.remote.StreakApiService
+import com.example.learningpandaai.features.progress.data.remote.ProgressApiService
+import com.example.learningpandaai.features.askpanda.data.remote.AgentApiService
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -108,4 +111,18 @@ object AppModule {
     @Singleton
     fun provideProfileApiService(retrofit: Retrofit): ProfileApiService =
         retrofit.create(ProfileApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideStreakApiService(retrofit: Retrofit): StreakApiService =
+        retrofit.create(StreakApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideProgressApiService(retrofit: Retrofit): ProgressApiService =
+        retrofit.create(ProgressApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAgentApiService(retrofit: Retrofit): AgentApiService =
+        retrofit.create(AgentApiService::class.java)
 }

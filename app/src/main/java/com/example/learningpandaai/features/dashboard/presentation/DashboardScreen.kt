@@ -47,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.learningpandaai.R
 import com.example.learningpandaai.core.navigation.Screen
 import com.example.learningpandaai.features.home.presentation.HomeScreen
+import com.example.learningpandaai.features.progress.presentation.ProgressScreen
 
 /**
  * Shell for the main bottom-navigation experience.
@@ -177,8 +178,9 @@ fun DashboardScreen(
                 )
             }
             composable(route = Screen.Progress.route) {
-                PlaceholderTab("Progress")
+                ProgressScreen(viewModel = hiltViewModel())
             }
+
             composable(route = Screen.AskPanda.route) {
                 PlaceholderTab("Ask Panda")
             }

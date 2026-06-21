@@ -15,7 +15,12 @@ import com.example.learningpandaai.features.onboarding.domain.OnboardingReposito
 import com.example.learningpandaai.features.profile.data.MockProfileRepositoryImpl
 import com.example.learningpandaai.features.profile.data.ProfileRepositoryImpl
 import com.example.learningpandaai.features.profile.domain.ProfileRepository
-
+import com.example.learningpandaai.features.progress.data.MockProgressRepositoryImpl
+import com.example.learningpandaai.features.progress.data.ProgressRepositoryImpl
+import com.example.learningpandaai.features.progress.domain.ProgressRepository
+import com.example.learningpandaai.features.askpanda.data.AgentRepositoryImpl
+import com.example.learningpandaai.features.askpanda.data.MockAgentRepositoryImpl
+import com.example.learningpandaai.features.askpanda.domain.AgentRepository
 @Module
 @InstallIn(SingletonComponent::class)
 object DevRepositoryModule {
@@ -40,5 +45,19 @@ object DevRepositoryModule {
         real: ProfileRepositoryImpl,
         mock: MockProfileRepositoryImpl
     ): ProfileRepository = if (BuildConfig.DEV_REAL_PROFILE) real else mock
+
+
+    @Provides
+    @Singleton
+    fun provideProgressRepository(
+        real: ProgressRepositoryImpl,
+        mock: MockProgressRepositoryImpl
+    ): ProgressRepository = if (BuildConfig.DEV_REAL_PROGRESS) real else mock
+    @Provides
+    @Singleton
+    fun provideAgentRepository(
+        real: AgentRepositoryImpl,
+        mock: MockAgentRepositoryImpl
+    ): AgentRepository = if (BuildConfig.DEV_REAL_AGENT) real else mock
 
 }
