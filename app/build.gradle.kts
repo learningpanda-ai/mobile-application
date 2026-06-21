@@ -19,11 +19,7 @@ fun devRealFlag(propertyKey: String, default: Boolean = false): String {
 
 android {
     namespace = "com.example.learningpandaai"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.learningpandaai"
