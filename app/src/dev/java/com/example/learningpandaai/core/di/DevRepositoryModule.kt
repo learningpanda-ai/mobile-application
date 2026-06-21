@@ -9,6 +9,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import com.example.learningpandaai.features.onboarding.data.MockOnboardingRepositoryImpl
+import com.example.learningpandaai.features.onboarding.data.OnboardingRepositoryImpl
+import com.example.learningpandaai.features.onboarding.domain.OnboardingRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -20,4 +23,13 @@ object DevRepositoryModule {
         real: AuthRepositoryImpl,
         mock: MockAuthRepositoryImpl
     ): AuthRepository = if (BuildConfig.DEV_REAL_AUTH) real else mock
+
+    @Provides
+    @Singleton
+    fun provideOnboardingRepository(
+        real: OnboardingRepositoryImpl,
+        mock: MockOnboardingRepositoryImpl
+    ): OnboardingRepository = if (BuildConfig.DEV_REAL_ONBOARDING) real else mock
+
+
 }

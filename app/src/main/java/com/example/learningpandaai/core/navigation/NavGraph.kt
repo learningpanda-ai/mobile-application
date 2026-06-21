@@ -14,6 +14,8 @@ import com.example.learningpandaai.features.auth.presentation.AuthScreen
 import com.example.learningpandaai.features.auth.presentation.AuthViewModel
 import com.example.learningpandaai.features.splash.presentation.SplashScreen
 import com.example.learningpandaai.features.splash.presentation.SplashViewModel
+import com.example.learningpandaai.features.onboarding.presentation.OnboardingScreen
+import com.example.learningpandaai.features.onboarding.presentation.OnboardingViewModel
 
 @Composable
 fun SetupNavGraph(
@@ -57,7 +59,15 @@ fun SetupNavGraph(
         }
 
         composable(route = Screen.Onboarding.route) {
-            PlaceholderScreen("Onboarding — coming next")
+            val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+            OnboardingScreen(
+                viewModel = onboardingViewModel,
+                onNavigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Onboarding.route) { inclusive = true }
+                    }
+                }
+            )
         }
         composable(route = Screen.Dashboard.route) {
             PlaceholderScreen("Dashboard — coming next")

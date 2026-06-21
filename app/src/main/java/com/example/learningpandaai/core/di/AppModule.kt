@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 import com.example.learningpandaai.features.auth.data.remote.AuthApiService
+import com.example.learningpandaai.features.profile.data.remote.ProfileApiService
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -103,4 +104,8 @@ object AppModule {
         retrofit.create(AuthApiService::class.java)
 
 
+    @Provides
+    @Singleton
+    fun provideProfileApiService(retrofit: Retrofit): ProfileApiService =
+        retrofit.create(ProfileApiService::class.java)
 }
