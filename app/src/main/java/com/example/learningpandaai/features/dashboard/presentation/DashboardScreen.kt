@@ -46,6 +46,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.learningpandaai.R
 import com.example.learningpandaai.core.navigation.Screen
+import com.example.learningpandaai.features.home.presentation.HomeScreen
+
 /**
  * Shell for the main bottom-navigation experience.
  *
@@ -158,7 +160,21 @@ fun DashboardScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = Screen.Home.route) {
-                PlaceholderTab("Home")
+                HomeScreen(
+                    viewModel = hiltViewModel(),
+                    onStartLessonClick = {
+                        navigateDashboardTab(childNavController, Screen.AskPanda.route)
+                    },
+                    onAskDoubtClick = {
+                        navigateDashboardTab(childNavController, Screen.AskPanda.route)
+                    },
+                    onProgressClick = {
+                        navigateDashboardTab(childNavController, Screen.Progress.route)
+                    },
+                    onPlayZoneClick = {
+                        navigateDashboardTab(childNavController, Screen.PlayZone.route)
+                    }
+                )
             }
             composable(route = Screen.Progress.route) {
                 PlaceholderTab("Progress")
