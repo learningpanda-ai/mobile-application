@@ -150,11 +150,18 @@ fun AuthScreen(
         },
         onGoogleSubmit = {
             if (uiState.isLoading) return@AuthContent
+            val webClientId = BuildConfig.GOOGLE_WEB_CLIENT_ID.trim()
+            if (webClientId.isEmpty()) {
+                viewModel.onGoogleError(
+                    "Google Sign-In is not configured. Add GOOGLE_WEB_CLIENT_ID to local.properties and rebuild."
+                )
+                return@AuthContent
+            }
             scope.launch {
                 try {
                     val googleIdOption = GetGoogleIdOption.Builder()
                         .setFilterByAuthorizedAccounts(false)
-                        .setServerClientId(BuildConfig.GOOGLE_WEB_CLIENT_ID)
+                        .setServerClientId(webClientId)
                         .build()
                     val request = GetCredentialRequest.Builder()
                         .addCredentialOption(googleIdOption)
@@ -166,6 +173,10 @@ fun AuthScreen(
                     } else {
                         viewModel.onGoogleError("Unsupported credential type.")
                     }
+                } catch (_: IllegalArgumentException) {
+                    viewModel.onGoogleError(
+                        "Google Sign-In is not configured. Add GOOGLE_WEB_CLIENT_ID to local.properties and rebuild."
+                    )
                 } catch (_: GetCredentialCancellationException) {
                     Logger.d("Google sign-in: user cancelled")
                 } catch (_: NoCredentialException) {
@@ -367,7 +378,7 @@ private fun AuthEntryPortal(
         }
 
         AuthGoogleButton(
-            enabled = !uiState.isLoading,
+            enabled = !uiState.isLoading && BuildConfig.GOOGLE_WEB_CLIENT_ID.isNotBlank(),
             isLoading = uiState.isLoading,
             onClick = onGoogleSubmit
         )

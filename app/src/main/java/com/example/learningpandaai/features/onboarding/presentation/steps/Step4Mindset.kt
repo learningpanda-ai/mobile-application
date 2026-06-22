@@ -22,9 +22,12 @@ fun Step4Mindset(
     onCareerIdeaSelected: (String) -> Unit,
     onDiscoverStrengthsSelected: (String) -> Unit
 ) {
-    val favoriteSubjects = listOf("Maths", "Science", "English", "Social Science", "Computer", "Not sure yet")
-    val studyFeelings = listOf("I enjoy learning", "It's okay", "I feel stressed", "I feel confused")
-    val careerIdeas = listOf("Yes, I have an idea", "I have many options", "Not yet", "I feel confused")
+    val favoriteSubjects =
+        listOf("Maths", "Science", "English", "Social Science", "Computer", "Not sure yet")
+    val studyFeelings =
+        listOf("I enjoy learning", "It's okay", "I feel stressed", "I feel confused")
+    val careerIdeas =
+        listOf("Yes, I have an idea", "I have many options", "Not yet", "I feel confused")
     val strengthInterests = listOf("Yes, definitely!", "Maybe", "Not sure")
 
     Column(

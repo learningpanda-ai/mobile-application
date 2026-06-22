@@ -31,7 +31,7 @@ fun SetupNavGraph(
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route,
-        modifier = Modifier
+        modifier = modifier
     ) {
         composable(route = Screen.Splash.route) {
             val splashViewModel: SplashViewModel = hiltViewModel()
