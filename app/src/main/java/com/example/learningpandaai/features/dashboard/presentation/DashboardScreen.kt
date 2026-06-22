@@ -50,6 +50,7 @@ import com.example.learningpandaai.features.home.presentation.HomeScreen
 import com.example.learningpandaai.features.progress.presentation.ProgressScreen
 import com.example.learningpandaai.features.askpanda.presentation.AskPandaScreen
 import com.example.learningpandaai.features.playzone.presentation.PlayZoneScreen
+import com.example.learningpandaai.features.profile.presentation.ProfileScreen
 
 /**
  * Shell for the main bottom-navigation experience.
@@ -190,8 +191,21 @@ fun DashboardScreen(
             composable(route = Screen.PlayZone.route) {
                 PlayZoneScreen(viewModel = hiltViewModel())
             }
+
             composable(route = Screen.Profile.route) {
-                PlaceholderTab("Profile")
+                ProfileScreen(
+                    viewModel = hiltViewModel(),
+                    onNavigateToEdit = {
+                        parentNavController.navigate(Screen.EditProfile.route)
+                    },
+                    onLogout = {
+                        parentNavController.navigate(Screen.Auth.route) {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    },
+                    onProfileDataSynced = dashboardViewModel::refreshShellFromCache,
+                    refreshTrigger = profileRefreshTrigger
+                )
             }
         }
     }

@@ -20,6 +20,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.learningpandaai.features.dashboard.presentation.DashboardScreen
 import com.example.learningpandaai.features.dashboard.presentation.DashboardViewModel
 import androidx.compose.runtime.getValue
+import com.example.learningpandaai.features.profile.presentation.EditProfileScreen
+import com.example.learningpandaai.features.profile.presentation.EditProfileViewModel
 
 @Composable
 fun SetupNavGraph(
@@ -82,6 +84,20 @@ fun SetupNavGraph(
                 dashboardViewModel = dashboardViewModel,
                 firstName = dashboardUiState.firstName,
                 selectedSubjects = dashboardUiState.selectedSubjects
+            )
+        }
+
+        composable(route = Screen.EditProfile.route) {
+            val editProfileViewModel: EditProfileViewModel = hiltViewModel()
+            EditProfileScreen(
+                viewModel = editProfileViewModel,
+                onBack = { navController.popBackStack() },
+                onSaved = {
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("profile_updated", true)
+                    navController.popBackStack()
+                }
             )
         }
 
