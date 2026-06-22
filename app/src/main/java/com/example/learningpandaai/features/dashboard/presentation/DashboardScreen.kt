@@ -49,7 +49,7 @@ import com.example.learningpandaai.core.navigation.Screen
 import com.example.learningpandaai.features.home.presentation.HomeScreen
 import com.example.learningpandaai.features.progress.presentation.ProgressScreen
 import com.example.learningpandaai.features.askpanda.presentation.AskPandaScreen
-import com.example.learningpandaai.features.askpanda.presentation.AskPandaViewModel
+import com.example.learningpandaai.features.playzone.presentation.PlayZoneScreen
 
 /**
  * Shell for the main bottom-navigation experience.
@@ -188,7 +188,7 @@ fun DashboardScreen(
             }
 
             composable(route = Screen.PlayZone.route) {
-                PlaceholderTab("Play Zone")
+                PlayZoneScreen(viewModel = hiltViewModel())
             }
             composable(route = Screen.Profile.route) {
                 PlaceholderTab("Profile")
